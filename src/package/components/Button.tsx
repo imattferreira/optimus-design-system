@@ -1,6 +1,7 @@
 import type { ButtonHTMLAttributes } from "react";
 
 import convertCssProps from "../utils/convertCssProps";
+import isAllowedDynamicComponentType from "../utils/isAllowedDynamicComponentType";
 import splitReactPropsOfDesignSystem from "../utils/splitReactPropsOfDesignSystem";
 import { styled } from "../styles";
 
@@ -8,17 +9,22 @@ import type BackgroundProps from "../types/BackgroundProps";
 import type FontProps from "../types/FontProps";
 import type PositionProps from "../types/PositionProps";
 import type SpacingProps from "../types/SpacingProps";
+import BorderProps from "../types/BorderProps";
 
 type HtmlButtonProps = Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'style' | 'className' | 'id'>;
-
+type StyledButtonProps = {
+  variant?: 'primary' | 'secondary' | 'blocked' | 'confirm' | 'warning';
+  as?: 'button' | 'a';
+}
 type ButtonProps = SpacingProps
   & FontProps
   & BackgroundProps
   & PositionProps
+  & BorderProps
   & HtmlButtonProps
-  & {
-    variant: 'primary' | 'secondary' | 'blocked' | 'confirm' | 'warning';
-  };
+  & StyledButtonProps;
+
+const allowedDynamicComponentTypes = ['button', 'a'];
 
 const StyledButton = styled('button', {
   p: '$2 $4',
@@ -27,11 +33,9 @@ const StyledButton = styled('button', {
   color: '$gray100',
   border: 'none',
   borderRadius: '$base',
-
   '&:hover': {
     bg: '$gray400',
   },
-
   variants: {
     variant: {
       primary: {
@@ -71,11 +75,15 @@ const StyledButton = styled('button', {
   }
 });
 
-function Button({ children, ...props }: ButtonProps) {
+function Button({ children, as, ...props }: ButtonProps) {
   const { designSystemProps, reactProps } = splitReactPropsOfDesignSystem(props);
+  const componentType = (as && isAllowedDynamicComponentType(allowedDynamicComponentTypes, as))
+    ? as
+    : 'button';
 
   return (
     <StyledButton
+      as={componentType}
       css={{...convertCssProps(designSystemProps)}}
       {...reactProps}
     >

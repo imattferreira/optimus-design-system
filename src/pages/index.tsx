@@ -7,7 +7,7 @@ const Home: NextPage = () => {
   return (
     <>
     <Text as="h1">Hello World</Text>
-    <Button ml="4" mt="12" variant="warning">Test</Button>
+    <Button ml="4" mt="12" variant="warning" bgHover="blue700">Test</Button>
     </>
   )
 }
