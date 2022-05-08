@@ -212,5 +212,6 @@ export const { getCssText, globalCss, styled, theme, config } = createStitches({
     maxSize: (value: PropertyValue<'maxWidth'>) => ({ maxWidth: value, maxHeight: value }),
     bg: (value: PropertyValue<'backgroundColor'>) => ({ backgroundColor: value }),
     bgHover: (value: PropertyValue<'backgroundColor'>) => ({ '&:hover': { backgroundColor: value } }),
+    direction: (value: PropertyValue<'flexDirection'>) => ({ flexDirection: value }),
   },
 })

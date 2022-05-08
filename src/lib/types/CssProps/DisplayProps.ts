@@ -6,6 +6,10 @@ interface DisplayProps {
    */
   alignItems?: 'center' | 'flex-start' | 'flex-end';
   /**
+   * flex-direction
+   */
+  direction?: 'column' | 'column-reverse' | 'row' | 'row-reverse';
+  /**
    * change element display type
    */
   display?: 'bloc' | 'inline' | 'inline-block' | 'flex' | 'grid' | 'inline-grid' | 'flow-root' | 'none' | 'contents';
