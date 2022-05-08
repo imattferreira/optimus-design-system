@@ -13,6 +13,7 @@ export default globalCss({
  button: {
    cursor: 'pointer',
    fontSize: '1rem',
+   border: 'none',
  },
  a: {
    textDecoration: 'none'

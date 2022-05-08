@@ -15,14 +15,14 @@ import DisplayProps from "../../types/CssProps/DisplayProps";
 import { forwardRef } from "react";
 
 type CustomButtonProps = {
-    /**
- * allowed dynamic component types.
- * default is 'button'.
- */
+  /**
+   * allowed dynamic component types.
+   * default is 'button'.
+   */
      as?: 'button' | 'a';
   /**
- * children
- */
+   * children
+   */
   children: React.ReactNode;
   /**
    * click handler

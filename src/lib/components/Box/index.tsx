@@ -1,4 +1,9 @@
 import { forwardRef } from "react";
+
+import convertCssProps from "../../utils/convertCssProps";
+import isAllowedDynamicComponentType from "../../utils/isAllowedDynamicComponentType";
+import splitReactPropsOfDesignSystem from "../../utils/splitReactPropsOfDesignSystem";
+
 import { styled } from "../../styles";
 
 import type {
@@ -7,9 +12,6 @@ import type {
   PositionProps,
   SpacingProps,
 } from "../../types/CssProps";
-import convertCssProps from "../../utils/convertCssProps";
-import isAllowedDynamicComponentType from "../../utils/isAllowedDynamicComponentType";
-import splitReactPropsOfDesignSystem from "../../utils/splitReactPropsOfDesignSystem";
 
 type CustomBoxProps = {
   /**

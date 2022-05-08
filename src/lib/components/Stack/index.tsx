@@ -1,12 +1,18 @@
+import { forwardRef } from "react";
+
 import convertCssProps from "../../utils/convertCssProps";
 import isAllowedDynamicComponentType from "../../utils/isAllowedDynamicComponentType";
 import splitReactPropsOfDesignSystem from "../../utils/splitReactPropsOfDesignSystem";
 
 import { config, styled } from "../../styles";
 
-import type { BackgroundProps, BorderProps, PositionProps, SpacingProps } from "../../types/CssProps";
-import DisplayProps from "../../types/CssProps/DisplayProps";
-import { forwardRef } from "react";
+import type {
+  BackgroundProps,
+  BorderProps,
+  DisplayProps,
+  PositionProps,
+  SpacingProps,
+} from "../../types/CssProps";
 
 type CustomStackProps = {
   /**
