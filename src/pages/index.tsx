@@ -6,7 +6,7 @@ const Home: NextPage = () => {
   return (
     <>
     <h1>Hello World</h1>
-    <Button ml="4" mt="8">Test</Button>
+    <Button ml="4" mt="12" variant="warning">Test</Button>
     </>
   )
 }

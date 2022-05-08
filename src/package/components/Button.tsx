@@ -1,5 +1,7 @@
 import type { ButtonHTMLAttributes } from "react";
 
+import convertCssProps from "../utils/convertCssProps";
+import splitReactPropsOfDesignSystem from "../utils/splitReactPropsOfDesignSystem";
 import { styled } from "../styles";
 
 import type BackgroundProps from "../types/BackgroundProps";
@@ -7,82 +9,79 @@ import type FontProps from "../types/FontProps";
 import type PositionProps from "../types/PositionProps";
 import type SpacingProps from "../types/SpacingProps";
 
-type ButtonProps = SpacingProps & FontProps & BackgroundProps & PositionProps & ButtonHTMLAttributes<HTMLButtonElement>;
+type HtmlButtonProps = Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'style' | 'className' | 'id'>;
+
+type ButtonProps = SpacingProps
+  & FontProps
+  & BackgroundProps
+  & PositionProps
+  & HtmlButtonProps
+  & {
+    variant: 'primary' | 'secondary' | 'blocked' | 'confirm' | 'warning';
+  };
 
 const StyledButton = styled('button', {
   p: '$2 $4',
-  bg: '$purple400',
-  fontWeight: 400,
+  bg: '$gray500',
+  fontWeight: 600,
   color: '$gray100',
   border: 'none',
   borderRadius: '$base',
 
   '&:hover': {
-    background: '$purple300',
+    bg: '$gray400',
+  },
+
+  variants: {
+    variant: {
+      primary: {
+        bg: '$blue600',
+        color: '$gray100',
+        '&:hover': {
+          bg: '$blue500',
+        },
+      },
+      secondary: {
+        bg: '$purple500',
+        color: '$gray100',
+        '&:hover': {
+          bg: '$purple400',
+        },
+      },
+      blocked: {
+        bg: '$gray400',
+        color: '$gray100',
+        cursor: 'not-allowed'
+      },
+      confirm: {
+        bg: '$green600',
+        color: '$gray100',
+        '&:hover': {
+          bg: '$green500'
+        }
+      },
+      warning: {
+        bg: '$red600',
+        color: '$gray100',
+        '&:hover': {
+          bg: '$red400'
+        }
+      },
+    }
   }
 });
 
-const marginPropNames = ['m', 'mt', 'mb', 'ml', 'mr'];
-const paddingPropNames = ['p', 'pt', 'pb', 'pl', 'pr'];
-const colorPropNames = ['bg', 'color'];
-const borderWidthPropNames = ['border'];
-const radiiPropNames = ['borderRadius'];
-const zIndexPropNames = ['zIndex'];
-
-const cssPropsThatHaveTokens = [
-  marginPropNames,
-  paddingPropNames,
-  colorPropNames,
-  borderWidthPropNames,
-  radiiPropNames,
-  zIndexPropNames,
-].flat();
-const cssProps = [
-  ...cssPropsThatHaveTokens,
-  'position',
-  'top',
-  'bottom',
-  'left',
-  'right',
-  'inset',
-];
-
-type SplitReactPropsOfDesignSystem<T = Record<string, string>> = (props: T) => {
-  reactProps: Record<string, string>,
-  designSystemProps: Record<string, string>
-};
-
-type ParseArrKeyParToObj =  (arr: Array<[string, string]>) => Record<string, string>;
-
-type ConvertCssProps<T = Record<string, string>> = (props: T) => Record<string, string>;
-
-const parseArrKeyParToObj: ParseArrKeyParToObj = (arr) =>  arr.reduce((acc, [key, value]) => ({...acc, [key]: value}), {});
-
-const splitReactPropsOfDesignSystem: SplitReactPropsOfDesignSystem = (props) =>  {
-  const propsKeyPar =  Object.entries(props);
-
-  const designSystemProps = parseArrKeyParToObj(
-    propsKeyPar.filter(([key]) => cssProps.includes(key))
-  );
-
-  const reactProps = parseArrKeyParToObj(
-    propsKeyPar.filter(([key]) => !cssProps.includes(key))
-  );
-
-  return { designSystemProps, reactProps };
-}
-
-const convertCssProps: ConvertCssProps<T> = <T,>(props: T) =>
-   Object.entries(props).reduce((acc, [key, value]) => (
-    cssPropsThatHaveTokens.includes(key)
-      ? { ...acc, [key]: `$${value}` }
-      : { ...acc, key: value }
-  ), {});
-
 function Button({ children, ...rest }: ButtonProps) {
-  splitReactPropsOfDesignSystem(rest);
+  const { designSystemProps, reactProps } = splitReactPropsOfDesignSystem(rest);
 
-  return <StyledButton css={{...convertCssProps(rest)}}>{children}</StyledButton>
+  return (
+    <StyledButton
+      css={{...convertCssProps(designSystemProps)}}
+      {...reactProps}
+    >
+      {children}
+    </StyledButton>
+  );
 }
 
 export default Button;
