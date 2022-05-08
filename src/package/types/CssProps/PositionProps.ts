@@ -1,6 +1,9 @@
-import { config } from "../styles";
+import { config } from "../../styles";
 
 interface PositionProps {
+  /**
+   * z-index
+   */
   zIndex?: keyof typeof config.theme.zIndices;
 }
 

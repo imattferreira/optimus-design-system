@@ -3,10 +3,10 @@
  An simple and minimal Design System to create React Component faster.
 
 ## 🛠️ Tools used to build this Design System
-- (Typescript)[https://www.typescriptlang.org/]
-- (ReactJS)[https://reactjs.org/]
-- (Stitches)[https://stitches.dev/]
-- (Storybook)[https://storybook.js.org/]
+- [Typescript](https://www.typescriptlang.org/)
+- [ReactJS](https://reactjs.org/)
+- [Stitches](https://stitches.dev/)
+- [Storybook](https://storybook.js.org/)
 
 ## ⚠️ Before to you use
  This project is a case of study of how create an Design System. Therefore, isn't recommended to use it in production.

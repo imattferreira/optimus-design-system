@@ -1,19 +1,61 @@
-import type { ButtonHTMLAttributes } from "react";
+import convertCssProps from "../../utils/convertCssProps";
+import isAllowedDynamicComponentType from "../../utils/isAllowedDynamicComponentType";
+import splitReactPropsOfDesignSystem from "../../utils/splitReactPropsOfDesignSystem";
 
-import convertCssProps from "../utils/convertCssProps";
-import isAllowedDynamicComponentType from "../utils/isAllowedDynamicComponentType";
-import splitReactPropsOfDesignSystem from "../utils/splitReactPropsOfDesignSystem";
-import { styled } from "../styles";
+import { styled } from "../../styles";
 
-import type BackgroundProps from "../types/BackgroundProps";
-import type FontProps from "../types/FontProps";
-import type PositionProps from "../types/PositionProps";
-import type SpacingProps from "../types/SpacingProps";
-import BorderProps from "../types/BorderProps";
+import type {
+  BackgroundProps,
+  BorderProps,
+  FontProps,
+  PositionProps,
+  SpacingProps,
+} from '../../types/CssProps';
 
-type HtmlButtonProps = Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'style' | 'className' | 'id'>;
+type HtmlButtonProps = {
+  /**
+   * click handler
+   */
+  onClick?: () => void;
+  /**
+   * hover handler
+   */
+  onHover?: () => void;
+  /**
+   * mouse pointer is moved onto the component handler
+   */
+  onMouseEnter?: () => void;
+  /**
+   * mouse pointer presses the button handler
+   */
+  onMouseDown?: () => void;
+  /**
+   * mouse pointer is moved out the component handler
+   */
+  onMouseLeave?: () => void;
+  /**
+   * mouse pointer is moved onto the component or onto one of its children handler
+   */
+  onMouseOver?: () => void;
+  /**
+   * mouse pointer press the button handler
+   */
+  onMouseUp?: () => void;
+  /**
+   * children
+   */
+  children: React.ReactNode;
+};
 type StyledButtonProps = {
+  /**
+   * pre-defined styles variants.
+   * default is none.
+   */
   variant?: 'primary' | 'secondary' | 'blocked' | 'confirm' | 'warning';
+  /**
+   * allowed dynamic component types.
+   * default is 'button'.
+   */
   as?: 'button' | 'a';
 }
 type ButtonProps = SpacingProps

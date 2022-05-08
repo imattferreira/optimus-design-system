@@ -4,9 +4,11 @@ import isAllowedDynamicComponentType from "../utils/isAllowedDynamicComponentTyp
 import splitReactPropsOfDesignSystem from "../utils/splitReactPropsOfDesignSystem";
 import { styled } from "../styles";
 
-import type FontProps from "../types/FontProps";
-import type PositionProps from "../types/PositionProps";
-import type SpacingProps from "../types/SpacingProps";
+import type {
+  FontProps,
+  PositionProps,
+  SpacingProps,
+} from "../types/CssProps";
 
 type TextProps = SpacingProps & FontProps & PositionProps & {
   as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span';
