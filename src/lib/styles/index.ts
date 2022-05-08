@@ -213,5 +213,6 @@ export const { getCssText, globalCss, styled, theme, config } = createStitches({
     bg: (value: PropertyValue<'backgroundColor'>) => ({ backgroundColor: value }),
     bgHover: (value: PropertyValue<'backgroundColor'>) => ({ '&:hover': { backgroundColor: value } }),
     direction: (value: PropertyValue<'flexDirection'>) => ({ flexDirection: value }),
+    spacing: (value: PropertyValue<'margin'>) => ({ '& > *:not(:last-child)': { marginBottom: value } })
   },
 })

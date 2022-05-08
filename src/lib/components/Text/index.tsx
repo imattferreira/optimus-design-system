@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { forwardRef, ReactNode } from "react";
 
 import isAllowedDynamicComponentType from "../../utils/isAllowedDynamicComponentType";
 import splitReactPropsOfDesignSystem from "../../utils/splitReactPropsOfDesignSystem";
@@ -10,7 +10,7 @@ import type {
   SpacingProps,
 } from "../../types/CssProps";
 
-type HtmlTextProps = {
+type CustomTextProps = {
   /**
    * allowed dynamic component types.
    * default is 'span'.
@@ -22,8 +22,8 @@ type HtmlTextProps = {
    children: ReactNode;
 }
 
-type TextProps = FontProps
-  & HtmlTextProps
+type TextProps = CustomTextProps
+  & FontProps
   & PositionProps
   & SpacingProps;
 
@@ -40,7 +40,7 @@ const allowedDynamicComponentTypes = [
 
 const StyledText = styled('span', {});
 
-const Text = ({ children, as = 'span', ...props }: TextProps) => {
+const Text = forwardRef(({ children, as = 'span', ...props }: TextProps, ref) => {
   const { designSystemProps } = splitReactPropsOfDesignSystem(props);
   const componentType = isAllowedDynamicComponentType(
     allowedDynamicComponentTypes,
@@ -48,10 +48,10 @@ const Text = ({ children, as = 'span', ...props }: TextProps) => {
   ) ? as : 'span';
 
   return (
-    <StyledText as={componentType} css={{ ...designSystemProps }}>
+    <StyledText as={componentType} ref={ref as any} css={{ ...designSystemProps }}>
       {children}
     </StyledText>
   )
-}
+})
 
 export default Text;

@@ -15,11 +15,12 @@ const Template: ComponentStory<typeof StackComponent> = (args) => <StackComponen
 
 export const Stack = Template.bind({});
 Stack.args = {
+  p: '4',
+  spacing: '10',
   children: (
     <>
       <Text>Hello World</Text>
       <Text>How are you?</Text>
     </>
   ),
-  p: '4',
 }

@@ -2,12 +2,13 @@ import convertCssProps from "../../utils/convertCssProps";
 import isAllowedDynamicComponentType from "../../utils/isAllowedDynamicComponentType";
 import splitReactPropsOfDesignSystem from "../../utils/splitReactPropsOfDesignSystem";
 
-import { styled } from "../../styles";
+import { config, styled } from "../../styles";
 
 import type { BackgroundProps, BorderProps, PositionProps, SpacingProps } from "../../types/CssProps";
 import DisplayProps from "../../types/CssProps/DisplayProps";
+import { forwardRef } from "react";
 
-type HtmlStackProps = {
+type CustomStackProps = {
   /**
  * allowed dynamic component types.
  * default is `div`;
@@ -17,12 +18,16 @@ type HtmlStackProps = {
    * children
    */
   children: React.ReactNode;
+  /**
+   * spacing between children components
+   */
+  spacing?: keyof typeof config.theme.space;
 }
 
 type StackProps = BackgroundProps
   & BorderProps
+  & CustomStackProps
   & DisplayProps
-  & HtmlStackProps
   & PositionProps
   & SpacingProps;
 
@@ -43,7 +48,7 @@ const StyledStack = styled('div', {
   flexDirection: 'column',
 });
 
-const Stack = ({ as = 'div', children, ...props }: StackProps) => {
+const Stack = forwardRef(({ as = 'div', children, ...props }: StackProps, ref) => {
   const { designSystemProps } = splitReactPropsOfDesignSystem(props);
   const componentType = isAllowedDynamicComponentType(
     allowedDynamicComponentTypes,
@@ -53,11 +58,12 @@ const Stack = ({ as = 'div', children, ...props }: StackProps) => {
   return (
     <StyledStack
       as={componentType}
+      ref={ref as any}
       css={{ ...convertCssProps(designSystemProps) }}
     >
       {children}
     </StyledStack>
   )
-}
+})
 
 export default Stack;

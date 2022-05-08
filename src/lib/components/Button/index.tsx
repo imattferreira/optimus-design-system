@@ -12,8 +12,14 @@ import type {
   SpacingProps,
 } from '../../types/CssProps';
 import DisplayProps from "../../types/CssProps/DisplayProps";
+import { forwardRef } from "react";
 
-type HtmlButtonProps = {
+type CustomButtonProps = {
+    /**
+ * allowed dynamic component types.
+ * default is 'button'.
+ */
+     as?: 'button' | 'a';
   /**
  * children
  */
@@ -50,29 +56,21 @@ type HtmlButtonProps = {
    * button html types
    */
   type?: 'button' | 'submit' | 'reset';
-};
-
-type StyledButtonProps = {
-  /**
- * allowed dynamic component types.
- * default is 'button'.
- */
-  as?: 'button' | 'a';
-  /**
+    /**
    * pre-defined styles variants.
    * default is none.
    */
-  variant?: 'primary' | 'secondary' | 'disabled' | 'confirm' | 'warning';
-}
+     variant?: 'primary' | 'secondary' | 'disabled' | 'confirm' | 'warning';
+};
+
 
 type ButtonProps = BackgroundProps
   & BorderProps
+  & CustomButtonProps
   & DisplayProps
   & FontProps
-  & HtmlButtonProps
   & PositionProps
-  & SpacingProps
-  & StyledButtonProps;
+  & SpacingProps;
 
 const allowedDynamicComponentTypes = ['button', 'a'];
 
@@ -125,7 +123,7 @@ const StyledButton = styled('button', {
   }
 });
 
-function Button({ children, as = 'button', ...props }: ButtonProps) {
+const Button = forwardRef(({ children, as = 'button', ...props }: ButtonProps, ref) => {
   const { designSystemProps, reactProps } = splitReactPropsOfDesignSystem(props);
   const componentType = isAllowedDynamicComponentType(
     allowedDynamicComponentTypes,
@@ -135,12 +133,13 @@ function Button({ children, as = 'button', ...props }: ButtonProps) {
   return (
     <StyledButton
       as={componentType}
+      ref={ref as any}
       css={{ ...convertCssProps(designSystemProps) }}
       {...reactProps}
     >
       {children}
     </StyledButton>
   );
-}
+})
 
 export default Button;

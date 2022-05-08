@@ -1,3 +1,4 @@
+import { forwardRef } from "react";
 import { styled } from "../../styles";
 
 import type {
@@ -10,7 +11,7 @@ import convertCssProps from "../../utils/convertCssProps";
 import isAllowedDynamicComponentType from "../../utils/isAllowedDynamicComponentType";
 import splitReactPropsOfDesignSystem from "../../utils/splitReactPropsOfDesignSystem";
 
-type HtmlBoxProps = {
+type CustomBoxProps = {
   /**
    * allowed dynamic component types.
    * default is `div`;
@@ -24,7 +25,7 @@ type HtmlBoxProps = {
 
 type BoxProps = BackgroundProps
   & BorderProps
-  & HtmlBoxProps
+  & CustomBoxProps
   & PositionProps
   & SpacingProps;
 
@@ -43,7 +44,7 @@ const StyledBox = styled('div', {
   borderRadius: '$sm',
 });
 
-const Box = ({ as = 'div', children, ...props }: BoxProps) => {
+const Box = forwardRef(({ as = 'div', children, ...props }: BoxProps, ref) => {
   const { designSystemProps } = splitReactPropsOfDesignSystem(props);
   const componentType = isAllowedDynamicComponentType(
     allowedDynamicComponentTypes,
@@ -52,12 +53,13 @@ const Box = ({ as = 'div', children, ...props }: BoxProps) => {
 
   return (
     <StyledBox
+      ref={ref as any}
       as={componentType}
       css={{ ...convertCssProps(designSystemProps) }}
     >
       {children}
     </StyledBox>
   )
-}
+})
 
 export default Box;
