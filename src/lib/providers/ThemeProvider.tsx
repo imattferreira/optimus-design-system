@@ -21,6 +21,4 @@ function ThemeProvider({ children }: IThemeProvider) {
   )
 }
 
-const useTheme = () => useContext(ThemeContext);
-
-export { ThemeProvider, useTheme }
+export { ThemeProvider, ThemeContext }

@@ -4,7 +4,11 @@ interface FontProps {
   /**
    * font-size
    */
-  fontSize?: keyof typeof config.theme.sizes;
+  fontSize?: keyof typeof config.theme.fontSizes;
+  /**
+   * font-weight
+   */
+  fontWeight?: keyof typeof config.theme.fontWeights;
   /**
    * font color
    */

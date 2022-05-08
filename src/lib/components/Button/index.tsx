@@ -11,8 +11,13 @@ import type {
   PositionProps,
   SpacingProps,
 } from '../../types/CssProps';
+import DisplayProps from "../../types/CssProps/DisplayProps";
 
 type HtmlButtonProps = {
+  /**
+ * children
+ */
+  children: React.ReactNode;
   /**
    * click handler
    */
@@ -21,14 +26,14 @@ type HtmlButtonProps = {
    * hover handler
    */
   onHover?: () => void;
+    /**
+   * mouse pointer presses the button handler
+   */
+     onMouseDown?: () => void;
   /**
    * mouse pointer is moved onto the component handler
    */
   onMouseEnter?: () => void;
-  /**
-   * mouse pointer presses the button handler
-   */
-  onMouseDown?: () => void;
   /**
    * mouse pointer is moved out the component handler
    */
@@ -42,28 +47,31 @@ type HtmlButtonProps = {
    */
   onMouseUp?: () => void;
   /**
-   * children
+   * button html types
    */
-  children: React.ReactNode;
+  type?: 'button' | 'submit' | 'reset';
 };
+
 type StyledButtonProps = {
+  /**
+ * allowed dynamic component types.
+ * default is 'button'.
+ */
+  as?: 'button' | 'a';
   /**
    * pre-defined styles variants.
    * default is none.
    */
-  variant?: 'primary' | 'secondary' | 'blocked' | 'confirm' | 'warning';
-  /**
-   * allowed dynamic component types.
-   * default is 'button'.
-   */
-  as?: 'button' | 'a';
+  variant?: 'primary' | 'secondary' | 'disabled' | 'confirm' | 'warning';
 }
-type ButtonProps = SpacingProps
-  & FontProps
-  & BackgroundProps
-  & PositionProps
+
+type ButtonProps = BackgroundProps
   & BorderProps
+  & DisplayProps
+  & FontProps
   & HtmlButtonProps
+  & PositionProps
+  & SpacingProps
   & StyledButtonProps;
 
 const allowedDynamicComponentTypes = ['button', 'a'];
@@ -94,7 +102,7 @@ const StyledButton = styled('button', {
           bg: '$purple400',
         },
       },
-      blocked: {
+      disabled: {
         bg: '$gray400',
         color: '$gray100',
         cursor: 'not-allowed'
@@ -117,16 +125,17 @@ const StyledButton = styled('button', {
   }
 });
 
-function Button({ children, as, ...props }: ButtonProps) {
+function Button({ children, as = 'button', ...props }: ButtonProps) {
   const { designSystemProps, reactProps } = splitReactPropsOfDesignSystem(props);
-  const componentType = (as && isAllowedDynamicComponentType(allowedDynamicComponentTypes, as))
-    ? as
-    : 'button';
+  const componentType = isAllowedDynamicComponentType(
+    allowedDynamicComponentTypes,
+    as,
+  ) ? as : 'button';
 
   return (
     <StyledButton
       as={componentType}
-      css={{...convertCssProps(designSystemProps)}}
+      css={{ ...convertCssProps(designSystemProps) }}
       {...reactProps}
     >
       {children}

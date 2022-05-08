@@ -1,5 +1,10 @@
-const marginPropNames = ['m', 'mt', 'mb', 'ml', 'mr'];
-const paddingPropNames = ['p', 'pt', 'pb', 'pl', 'pr'];
+const borderWidthPropNames = [
+  'borderWidth',
+  'borderTopWidth',
+  'borderBottomWidth',
+  'borderRightWidth',
+  'borderLeftWidth',
+];
 const colorPropNames = [
   'bg',
   'bgHover',
@@ -10,13 +15,9 @@ const colorPropNames = [
   'borderLeftColor',
   'borderRightColor',
 ];
-const borderWidthPropNames = [
-  'borderWidth',
-  'borderTopWidth',
-  'borderBottomWidth',
-  'borderRightWidth',
-  'borderLeftWidth',
-];
+const fontPropNames = ['fontWeight'];
+const marginPropNames = ['m', 'mt', 'mb', 'ml', 'mr'];
+const paddingPropNames = ['p', 'pt', 'pb', 'pl', 'pr'];
 const radiiPropNames = [
   'borderRadius',
   'borderBottomLeftRadius',
@@ -27,10 +28,11 @@ const radiiPropNames = [
 const zIndexPropNames = ['zIndex'];
 
 export const cssPropsThatHaveTokens = [
+  borderWidthPropNames,
+  colorPropNames,
+  fontPropNames,
   marginPropNames,
   paddingPropNames,
-  colorPropNames,
-  borderWidthPropNames,
   radiiPropNames,
   zIndexPropNames,
 ].flat();
@@ -43,6 +45,7 @@ const cssProps = [
   'left',
   'right',
   'inset',
+  'display'
 ];
 
 export default cssProps;

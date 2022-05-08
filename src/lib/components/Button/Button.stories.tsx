@@ -1,15 +1,20 @@
 import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
-import Button from '.';
+import ButtonComponent from '.';
 
 export default {
   title: 'Button',
-  component: Button,
+  component: ButtonComponent,
   argTypes: {},
-} as ComponentMeta<typeof Button>;
+} as ComponentMeta<typeof ButtonComponent>;
 
-const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />;
+const Template: ComponentStory<typeof ButtonComponent> = (args) => <ButtonComponent {...args} />;
+
+export const Button = Template.bind({});
+Button.args = {
+  children: 'Button',
+}
 
 export const Primary = Template.bind({});
 Primary.args = {
@@ -29,10 +34,10 @@ Confirm.args = {
   children: 'Confirm Button'
 }
 
-export const Blocked = Template.bind({});
-Blocked.args = {
-  variant: 'blocked',
-  children: 'Blocked Button'
+export const Disabled = Template.bind({});
+Disabled.args = {
+  variant: 'disabled',
+  children: 'Disabled Button'
 }
 
 export const Warning = Template.bind({});

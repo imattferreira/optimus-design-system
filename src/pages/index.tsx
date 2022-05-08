@@ -1,7 +1,6 @@
 import type { NextPage } from "next"
 
-import Button from "../package/components/Button"
-import Text from "../package/components/Text"
+import { Button, Text } from "../lib/components"
 
 const Home: NextPage = () => {
   return (
