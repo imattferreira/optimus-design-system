@@ -1,37 +1,13 @@
 import type { ButtonHTMLAttributes } from "react";
 
-import { styled, config } from "../styles";
+import { styled } from "../styles";
 
-interface MarginProps {
-  m?: keyof typeof config.theme.space,
-  mt?: keyof typeof config.theme.space,
-  mb?: keyof typeof config.theme.space,
-  ml?: keyof typeof config.theme.space,
-  mr?: keyof typeof config.theme.space,
-}
+import type BackgroundProps from "../types/BackgroundProps";
+import type FontProps from "../types/FontProps";
+import type PositionProps from "../types/PositionProps";
+import type SpacingProps from "../types/SpacingProps";
 
-interface PaddingProps {
-  p?: keyof typeof config.theme.space,
-  pt?: keyof typeof config.theme.space,
-  pb?: keyof typeof config.theme.space,
-  pl?: keyof typeof config.theme.space,
-  pr?: keyof typeof config.theme.space,
-}
-
-interface BackgroundProps {
-  bg?: keyof typeof config.theme.colors;
-}
-
-interface PositionProps {
-  zIndex?: keyof typeof config.theme.zIndices;
-}
-
-interface FontProps {
-  fontSize?: keyof typeof config.theme.sizes;
-  color?: keyof typeof config.theme.colors;
-}
-
-type ButtonProps = MarginProps & PaddingProps & FontProps & BackgroundProps & PositionProps & ButtonHTMLAttributes<HTMLButtonElement>;
+type ButtonProps = SpacingProps & FontProps & BackgroundProps & PositionProps & ButtonHTMLAttributes<HTMLButtonElement>;
 
 const StyledButton = styled('button', {
   p: '$2 $4',
