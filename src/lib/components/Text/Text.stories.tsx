@@ -7,6 +7,7 @@ export default {
   title: 'Text',
   component: TextComponent,
   argTypes: {},
+  args: {},
 } as ComponentMeta<typeof TextComponent>;
 
 const Template: ComponentStory<typeof TextComponent> = (args) => <TextComponent {...args} />;

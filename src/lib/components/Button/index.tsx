@@ -26,10 +26,10 @@ type HtmlButtonProps = {
    * hover handler
    */
   onHover?: () => void;
-    /**
-   * mouse pointer presses the button handler
-   */
-     onMouseDown?: () => void;
+  /**
+ * mouse pointer presses the button handler
+ */
+  onMouseDown?: () => void;
   /**
    * mouse pointer is moved onto the component handler
    */

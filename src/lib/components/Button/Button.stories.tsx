@@ -7,6 +7,7 @@ export default {
   title: 'Button',
   component: ButtonComponent,
   argTypes: {},
+  args: {},
 } as ComponentMeta<typeof ButtonComponent>;
 
 const Template: ComponentStory<typeof ButtonComponent> = (args) => <ButtonComponent {...args} />;
