@@ -71,8 +71,8 @@ const StyledButton = styled('button', {
   }
 });
 
-function Button({ children, ...rest }: ButtonProps) {
-  const { designSystemProps, reactProps } = splitReactPropsOfDesignSystem(rest);
+function Button({ children, ...props }: ButtonProps) {
+  const { designSystemProps, reactProps } = splitReactPropsOfDesignSystem(props);
 
   return (
     <StyledButton
