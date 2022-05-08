@@ -15,7 +15,7 @@ const colorPropNames = [
   'borderLeftColor',
   'borderRightColor',
 ];
-const fontPropNames = ['fontWeight'];
+const fontPropNames = ['fontWeight', 'fontSize'];
 const marginPropNames = ['m', 'mt', 'mb', 'ml', 'mr', 'spacing'];
 const paddingPropNames = ['p', 'pt', 'pb', 'pl', 'pr'];
 const radiiPropNames = [

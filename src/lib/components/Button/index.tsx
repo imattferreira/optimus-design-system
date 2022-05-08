@@ -19,7 +19,7 @@ type CustomButtonProps = {
    * allowed dynamic component types.
    * default is 'button'.
    */
-     as?: 'button' | 'a';
+  as?: 'button' | 'a';
   /**
    * children
    */
@@ -56,11 +56,11 @@ type CustomButtonProps = {
    * button html types
    */
   type?: 'button' | 'submit' | 'reset';
-    /**
+  /**
    * pre-defined styles variants.
    * default is none.
    */
-     variant?: 'primary' | 'secondary' | 'disabled' | 'confirm' | 'warning';
+  variant?: 'primary' | 'secondary' | 'disabled' | 'confirm' | 'warning';
 };
 
 
