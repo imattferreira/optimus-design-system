@@ -4,7 +4,7 @@ interface BorderProps {
   /**
    * border width
    */
-  borderWidth?: keyof typeof config.theme.sizes;
+  borderWidth?: keyof typeof config.theme.borderWidths;
   /**
    * border top width
    */

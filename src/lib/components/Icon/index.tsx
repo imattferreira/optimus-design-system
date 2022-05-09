@@ -9,6 +9,9 @@ import { styled } from "../../styles";
 import type { FontProps, PositionProps, SpacingProps } from "../../types/CssProps";
 
 type CustomIconProps = {
+  /**
+   * type of icon to show
+   */
   as: keyof typeof ReactIcons;
 }
 
@@ -18,11 +21,14 @@ type IconProps = CustomIconProps
   & SpacingProps;
 
 const StyledIcon = styled('div', {
-  fontSize: '$6',
-  color: '$gray800'
+  fontSize: '$4',
+  color: '$gray900',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
 });
 
-const Icon = forwardRef(({ as: iconName, ...props }: IconProps, ref) => {
+const Icon = forwardRef(({ as: iconName, color, ...props }: IconProps, ref) => {
   const { designSystemProps, reactProps } = splitReactPropsOfDesignSystem(props);
 
   return (
@@ -31,7 +37,7 @@ const Icon = forwardRef(({ as: iconName, ...props }: IconProps, ref) => {
       css={{ ...convertCssProps(designSystemProps) }}
       {...reactProps}
     >
-      {createElement(ReactIcons[iconName])}
+      {createElement(ReactIcons[iconName], { color })}
     </StyledIcon>
   );
 });

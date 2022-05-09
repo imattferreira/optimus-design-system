@@ -8,7 +8,8 @@ export default globalCss({
   transition: '250ms',
  },
  body: {
-   fontFamily: 'Roboto, sans-serif'
+   fontFamily: 'Roboto, sans-serif',
+   color: '$gray900',
  },
  button: {
    cursor: 'pointer',

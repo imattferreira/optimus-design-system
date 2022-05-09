@@ -60,13 +60,11 @@ export const { getCssText, globalCss, styled, theme, config } = createStitches({
     },
     borderWidths: {
       none: '0',
-      sm: '0.125rem',
-      base: '0.25rem',
-      md: '0.375rem',
-      lg: '0.5rem',
-      xl: '0.75rem',
-      '2xl': '1rem',
-      '3xl': '1.5rem',
+      sm: '1px',
+      md: '2px',
+      lg: '4px',
+      xl: '6px',
+      '2xl': '8px',
     },
     radii: {
       none: '0',

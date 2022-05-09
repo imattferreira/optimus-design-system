@@ -4,6 +4,7 @@
 
 ## 🛠️ Tools used to build this Design System
 - [ReactJS](https://reactjs.org/)
+- [React Hook Form](https://react-hook-form.com/)
 - [React Icons](https://react-icons.github.io/react-icons/)
 - [Stitches](https://stitches.dev/)
 - [Storybook](https://storybook.js.org/)
