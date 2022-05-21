@@ -1,11 +1,12 @@
 # Optimus Design System
 
- An simple and minimal Design System to create React Component faster.
+ An simple and minimal Design System to create React components with NextJS faster.
 
 ## 🛠️ Tools used to build this Design System
 - [ReactJS](https://reactjs.org/)
 - [React Hook Form](https://react-hook-form.com/)
 - [React Icons](https://react-icons.github.io/react-icons/)
+- [NextJS](https://nextjs.org/)
 - [Stitches](https://stitches.dev/)
 - [Storybook](https://storybook.js.org/)
 - [Typescript](https://www.typescriptlang.org/)

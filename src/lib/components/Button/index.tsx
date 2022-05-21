@@ -1,3 +1,5 @@
+import { forwardRef } from "react";
+
 import convertCssProps from "../../utils/convertCssProps";
 import isAllowedDynamicComponentType from "../../utils/isAllowedDynamicComponentType";
 import splitReactPropsOfDesignSystem from "../../utils/splitReactPropsOfDesignSystem";
@@ -12,7 +14,6 @@ import type {
   SpacingProps,
 } from '../../types/CssProps';
 import DisplayProps from "../../types/CssProps/DisplayProps";
-import { forwardRef } from "react";
 
 type CustomButtonProps = {
   /**
