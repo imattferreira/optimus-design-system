@@ -6,28 +6,30 @@ import splitReactPropsOfDesignSystem from "../../utils/splitReactPropsOfDesignSy
 
 import { styled } from "../../styles";
 
-import type {
+import {
   BackgroundProps,
   BorderProps,
+  DisplayProps,
   PositionProps,
-  SpacingProps,
+  SpacingProps
 } from "../../types/CssProps";
 
-type CustomBoxProps = {
-  /**
-   * allowed dynamic component types.
-   * default is `div`;
-   */
-  as?: 'article' | 'aside' | 'div' | 'footer' | 'header' | 'nav' | 'section';
-  /**
-   * children
-   */
-  children: React.ReactNode;
+type CustomFlexProps = {
+/**
+ * allowed dynamic component types.
+ * default is `div`;
+ */
+as?: 'article' | 'aside' | 'div' | 'footer' | 'header' | 'nav' | 'section';
+/**
+ * children
+ */
+children: React.ReactNode;
 }
 
-type BoxProps = BackgroundProps
+type FlexProps = BackgroundProps
   & BorderProps
-  & CustomBoxProps
+  & DisplayProps
+  & CustomFlexProps
   & PositionProps
   & SpacingProps;
 
@@ -41,28 +43,29 @@ const allowedDynamicComponentTypes = [
   'section',
 ];
 
-const StyledBox = styled('div', {
+const StyledFlex = styled('div', {
   bg: '$gray100',
   borderRadius: '$sm',
   p: '$2',
+  display: 'flex',
 });
 
-const Box = forwardRef(({ as = 'div', children, ...props }: BoxProps, ref) => {
-  const { designSystemProps } = splitReactPropsOfDesignSystem(props);
+const Flex = forwardRef(({ children, as = 'div', ...props }: FlexProps, ref) => {
+  const { designSystemProps, reactProps } = splitReactPropsOfDesignSystem(props);
   const componentType = isAllowedDynamicComponentType(
     allowedDynamicComponentTypes,
     as,
   ) ? as : 'div';
 
   return (
-    <StyledBox
-      ref={ref as any}
+    <StyledFlex
       as={componentType}
+      ref={ref as any}
       css={{ ...convertCssProps(designSystemProps) }}
     >
       {children}
-    </StyledBox>
-  )
-})
+    </StyledFlex>
+  );
+});
 
-export default Box;
+export default Flex;

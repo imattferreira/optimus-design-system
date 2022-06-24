@@ -12,7 +12,7 @@ interface DisplayProps {
   /**
    * change element display type
    */
-  display?: 'bloc' | 'inline' | 'inline-block' | 'flex' | 'grid' | 'inline-grid' | 'flow-root' | 'none' | 'contents';
+  display?: 'block' | 'inline' | 'inline-block' | 'flex' | 'grid' | 'inline-grid' | 'flow-root' | 'none' | 'contents';
   /**
    * distribute space between and around content items along main-axis
    * of a flex container

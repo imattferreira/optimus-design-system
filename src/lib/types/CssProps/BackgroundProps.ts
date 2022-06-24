@@ -2,7 +2,7 @@ import { config } from "../../styles";
 
 interface BackgroundProps {
   /**
-   * bacground color
+   * background color
    */
   bg?: keyof typeof config.theme.colors;
   /**
