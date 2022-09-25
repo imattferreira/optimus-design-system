@@ -15,15 +15,15 @@ import {
 } from "../../types/CssProps";
 
 type CustomFlexProps = {
-/**
- * allowed dynamic component types.
- * default is `div`;
- */
-as?: 'article' | 'aside' | 'div' | 'footer' | 'header' | 'nav' | 'section';
-/**
- * children
- */
-children: React.ReactNode;
+  /**
+   * allowed dynamic component types.
+   * default is `div`;
+   */
+  as?: 'article' | 'aside' | 'div' | 'footer' | 'header' | 'nav' | 'section';
+  /**
+   * children
+   */
+  children: React.ReactNode;
 }
 
 type FlexProps = BackgroundProps
@@ -62,6 +62,7 @@ const Flex = forwardRef(({ children, as = 'div', ...props }: FlexProps, ref) => 
       as={componentType}
       ref={ref as any}
       css={{ ...convertCssProps(designSystemProps) }}
+      {...reactProps}
     >
       {children}
     </StyledFlex>

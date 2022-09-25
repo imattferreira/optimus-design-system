@@ -52,6 +52,7 @@ const StyledStack = styled('div', {
   borderRadius: '$sm',
   display: 'flex',
   flexDirection: 'column',
+  p: '$2',
 });
 
 const Stack = forwardRef(({ as = 'div', children, ...props }: StackProps, ref) => {
