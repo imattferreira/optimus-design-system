@@ -1,40 +1,28 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import Text from './text';
+import Heading from './heading';
 
 const meta = {
-  title: 'Typography/Text',
-  component: Text,
+  title: 'Typography/Heading',
+  component: Heading,
   parameters: {
     layout: 'centered'
   },
   tags: ['autodocs'],
   args: {
-    as: 'p',
+    as: 'h2',
     color: {
       light: '',
       dark: ''
     },
-    size: 'size1',
+    size: 'size2',
     children: 'Hello World!'
   }
-} satisfies Meta<typeof Text>;
+} satisfies Meta<typeof Heading>;
 
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: { }
-}
-
-export const Bold: Story = {
-  args: {
-    bold: true
-  }
-}
-
-export const Italic: Story = {
-  args: {
-    italic: true
-  }
 }
 
 export default meta;
