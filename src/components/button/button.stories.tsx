@@ -11,6 +11,7 @@ const meta = {
   args: {
     as: 'button',
     children: 'Hello World!',
+    disabled: false,
     full: false,
     size: 'size1',
   },

@@ -1,5 +1,6 @@
 import type { MouseEventHandler } from 'react';
 import cs from '../../utils/cs';
+import type { StylesOf } from '../../@types/helpers';
 
 type ButtonTypes = 'primary' | 'secondary' | 'error' | 'success';
 
@@ -15,13 +16,13 @@ type ButtonCommonProps = {
    */
   as?: PolymorphicTags;
   /**
-   *
-   */
-  type: ButtonTypes;
-  /**
    * Content of Button
   */
   children: string;
+  /**
+   * Disable all interactivity of button
+   */
+  disabled?: boolean;
   /**
    * Ocupe full width
    */
@@ -51,6 +52,10 @@ type ButtonCommonProps = {
    */
   size?: Sizes;
   /**
+   * Change color palete
+   */
+  type: ButtonTypes;
+  /**
    * Callback to listen to `onclick` event
    */
   onClick?: (event: MouseEventHandler<HTMLButtonElement>) => void;
@@ -71,14 +76,14 @@ type BehaviorProps = ButtonButtonProps | ButtonLinkProps;
 
 type ButtonProps = ButtonCommonProps & BehaviorProps;
 
-const SIZES: Record<Sizes, string> = {
+const SIZES: StylesOf<Sizes> = {
   size1: 'h-12 min-w-12 px-4',
   size2: 'h-11 min-w-11 px-4',
   size3: 'h-10 min-w-10 px-3'
 }
 
 
-const TYPES: Record<ButtonTypes, Record<Shapes, string>> = {
+const TYPES: Record<ButtonTypes, StylesOf<Shapes>> = {
   error: {
     filled: 'bg-red-700 text-red-100 hover:bg-red-500 active:ring-red-500',
     ghost: 'text-red-700 hover:text-red-400 active:ring-red-300',
@@ -101,9 +106,16 @@ const TYPES: Record<ButtonTypes, Record<Shapes, string>> = {
   },
 }
 
+const DISABLED_BY_SHAPE: StylesOf<Shapes> = {
+  filled: 'bg-gray-300 text-gray-600',
+  ghost: 'text-gray-500',
+  outline: 'border-gray-300 text-gray-500',
+}
+
 function Button({
   as: Tag = 'button',
   children,
+  disabled = false,
   full = false,
   href,
   size = 'size1',
@@ -116,12 +128,14 @@ function Button({
       // TODO: configure `rel`, `target` and `refererpolicy`
       href={Tag === 'a' ? href : undefined}
       className={cs(
-        'rounded-md transition-all active:ring-2 ring-offset-2 font-medium',
+        'rounded-md transition-all active:ring-2 ring-offset-2 font-medium cursor-pointer',
+        'disabled:ring-transparent disabled:cursor-not-allowed',
+        disabled ? DISABLED_BY_SHAPE[shape] : TYPES[type][shape],
+        shape === 'outline' && 'border-solid border-2',
         SIZES[size],
         full && 'w-full',
-        shape === 'outline' && 'border-solid border-2',
-        TYPES[type][shape],
       )}
+      disabled={disabled}
       // @ts-expect-error: Caused due polymorphism
       onClick={onClick}
     >
