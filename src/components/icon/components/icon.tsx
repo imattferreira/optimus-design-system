@@ -1,6 +1,6 @@
 import { Suspense, lazy } from 'react';
 import dynamicIconImports from 'lucide-react/dynamicIconImports';
-import { IconProps } from '../helpers/types';
+import type { IconProps } from '../helpers/types';
 import { SIZES } from '../constants/styles';
 
 function Icon({ color, name, size }: IconProps) {
