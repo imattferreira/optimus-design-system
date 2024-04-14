@@ -1,3 +1,4 @@
+import type { StylesOf } from '../../@types/helpers';
 import cs from '../../utils/cs';
 
 type PolymorphicTags = 'span' | 'p';
@@ -46,7 +47,7 @@ type StylesProps = {
 
 type TextProps = TextCommonProps & StylesProps;
 
-const SIZES: Record<Sizes, string> = {
+const SIZES: StylesOf<Sizes> = {
   size1: 'text-base',
   size2: 'text-sm',
   size3: 'text-xs'
