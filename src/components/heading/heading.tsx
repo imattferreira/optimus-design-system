@@ -1,5 +1,5 @@
-import type { StylesOf } from '../../@types/helpers';
-import cs from '../../utils/cs';
+import type { StylesOf } from '~/@types/helpers';
+import cs from '~/utils/cs';
 
 type PolymorphicTags = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 

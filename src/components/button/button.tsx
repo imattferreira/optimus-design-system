@@ -1,6 +1,6 @@
 import type { MouseEventHandler } from 'react';
-import cs from '../../utils/cs';
-import type { StylesOf } from '../../@types/helpers';
+import cs from '~/utils/cs';
+import type { StylesOf } from '~/@types/helpers';
 
 type ButtonTypes = 'primary' | 'secondary' | 'error' | 'success';
 
