@@ -1,4 +1,4 @@
-import type { MouseEventHandler } from 'react';
+import { cloneElement, type MouseEventHandler } from 'react';
 import cs from '~/utils/cs';
 import type { StylesOf } from '~/@types/helpers';
 
@@ -28,17 +28,17 @@ type ButtonCommonProps = {
    */
   full?: boolean;
   /**
-   * WIP
+   * Render an icon as button content
    */
-  icon?: null;
+  icon?: React.ReactElement;
   /**
-   * WIP
+   * Render an icon on left-side
    */
-  iconLeft?: null;
+  iconLeft?: React.ReactElement;
   /**
-   * WIP
+   * Render an icon on right-side
    */
-  iconRight?: null;
+  iconRight?: React.ReactElement;
   /**
    * Attach a link to the element
    */
@@ -74,14 +74,38 @@ type ButtonLinkProps = {
 
 type BehaviorProps = ButtonButtonProps | ButtonLinkProps;
 
-type ButtonProps = ButtonCommonProps & BehaviorProps;
+// TODO: dont allow have left and right in the same time
+type ButtonContentProps = {
+  children: string;
+  icon?: never;
+  iconLeft?: React.ReactElement;
+  iconRight?: React.ReactElement;
+} | {
+  children?: never;
+  icon: React.ReactElement;
+  iconLeft?: never;
+  iconRight?: never;
+};
+
+type ButtonProps = ButtonCommonProps & BehaviorProps & ButtonContentProps;
 
 const SIZES: StylesOf<Sizes> = {
-  size1: 'h-12 min-w-12 px-4',
-  size2: 'h-11 min-w-11 px-4',
-  size3: 'h-10 min-w-10 px-3'
+  size1: 'h-12 min-w-12',
+  size2: 'h-11 min-w-11',
+  size3: 'h-10 min-w-10'
 }
 
+const INTERNAL_PADDING: StylesOf<Sizes> = {
+  size1: 'px-4',
+  size2: 'px-4',
+  size3: 'px-3'
+}
+
+const ICON_SIZES: StylesOf<Sizes> = {
+  size1: 'size5',
+  size2: 'size6',
+  size3: 'size7'
+}
 
 const TYPES: Record<ButtonTypes, StylesOf<Shapes>> = {
   error: {
@@ -106,11 +130,46 @@ const TYPES: Record<ButtonTypes, StylesOf<Shapes>> = {
   },
 }
 
+const ICON_TYPES: Record<ButtonTypes, StylesOf<Shapes>> = {
+  error: {
+    filled: 'text-red-100',
+    ghost: 'text-red-700 hover:text-red-400',
+    outline: 'text-red-700 hover:text-red-100',
+  },
+  primary: {
+    filled: 'text-violet-100',
+    ghost: 'text-violet-700 hover:text-violet-400',
+    outline: 'text-violet-700 hover:text-violet-100',
+  },
+  secondary: {
+    filled: 'text-fuchsia-100',
+    ghost: 'text-fuchsia-700 hover:text-fuchsia-400',
+    outline: 'text-fuchsia-700 hover:text-fuchsia-100',
+  },
+  success: {
+    filled: 'text-teal-100',
+    ghost: 'text-teal-700 hover:text-teal-400',
+    outline: 'text-teal-700 hover:text-teal-100',
+  },
+}
+
 const DISABLED_BY_SHAPE: StylesOf<Shapes> = {
   filled: 'bg-gray-300 text-gray-600',
   ghost: 'text-gray-500',
   outline: 'border-gray-300 text-gray-500',
 }
+
+const renderStyledIcon = ({
+  icon,
+  size,
+  type
+}: {
+  icon: React.ReactElement;
+  size: Sizes;
+  type: ButtonTypes
+}) => (
+  cloneElement(icon, { size: ICON_SIZES[size], color: ICON_TYPES[type] })
+);
 
 function Button({
   as: Tag = 'button',
@@ -118,8 +177,11 @@ function Button({
   disabled = false,
   full = false,
   href,
-  size = 'size1',
+  icon,
+  iconLeft,
+  iconRight,
   shape,
+  size = 'size1',
   type,
   onClick
 }: ButtonProps) {
@@ -128,9 +190,10 @@ function Button({
       // TODO: configure `rel`, `target` and `refererpolicy`
       href={Tag === 'a' ? href : undefined}
       className={cs(
-        'rounded-md transition-all active:ring-2 ring-offset-2 font-medium cursor-pointer',
+        'rounded-md transition-all active:ring-2 ring-offset-2 font-medium cursor-pointer flex gap-x-2 items-center justify-center',
         'disabled:ring-transparent disabled:cursor-not-allowed',
         disabled ? DISABLED_BY_SHAPE[shape] : TYPES[type][shape],
+        !icon && INTERNAL_PADDING[size],
         shape === 'outline' && 'border-solid border-2',
         SIZES[size],
         full && 'w-full',
@@ -139,7 +202,9 @@ function Button({
       // @ts-expect-error: Caused due polymorphism
       onClick={onClick}
     >
-      {children}
+      {iconLeft && renderStyledIcon({ icon: iconLeft, size, type })}
+      {icon ? renderStyledIcon({ icon, size, type }) : children}
+      {iconRight && renderStyledIcon({ icon: iconRight, size, type })}
     </Tag>
   )
 }
