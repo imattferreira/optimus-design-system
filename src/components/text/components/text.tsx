@@ -13,7 +13,7 @@ function Text({
   return (
     <Tag
       className={cs(
-        'text-[var(--text-color)] dark:text-[var(--dark-text-color)]',
+        'font-sans text-[var(--text-color)] dark:text-[var(--dark-text-color)]',
         SIZES[size],
         bold && 'font-bold',
         italic && 'italic'

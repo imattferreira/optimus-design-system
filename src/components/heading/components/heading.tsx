@@ -10,7 +10,7 @@ function Heading({
 }: HeadingProps) {
   return (
     <Tag className={cs(
-      'font-bold text-[var(--text-color)] dark:text-[var(--dark-text-color)]',
+      'font-bold font-sans text-[var(--text-color)] dark:text-[var(--dark-text-color)]',
       SIZES[size],
     )}
       style={{
